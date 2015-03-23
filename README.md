@@ -12,3 +12,8 @@
     rapgenius := rapgenius.New()
     artist, err := rapgenius.Artist(22)
     fmt.Printf("Artist is %s", artist.Name)
+
+### Retrieving Songs
+    rapgenius := rapgenius.New()
+    song, err := rapgenius.Song(22)
+    fmt.Printf("Song is %s", song.Title)    
