@@ -1,4 +1,5 @@
-# A Go RapGenius client
+# RapGenius client for Golang
+This is a RapGenius client for Golang which can be used to retrieve artists, retrieve songs, and search using the "public" API. 
 
 ## Install
     go get github.com/mondok/rapgenius
