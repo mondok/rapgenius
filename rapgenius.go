@@ -17,13 +17,18 @@ func checkErr(e error) bool {
 	return false
 }
 
-// searchResponse is a response
 type searchResponse struct {
 	Result *searchResults `json:"response"`
 }
 
-// searchResults are a list of
-// SearchHits from API
+type artistResponseRoot struct {
+	ArtistResponse *artistResponse `json:"response"`
+}
+
+type artistResponse struct {
+	Artist *Artist `json:"artist"`
+}
+
 type searchResults struct {
 	SearchHits []*SearchHit `json:"hits"`
 }
@@ -81,6 +86,18 @@ func (h *RapGenius) execute(path string, response interface{}) (err error) {
 			}
 		}
 	}
+	return
+}
+
+// Artist retrieves artist by ID
+func (h *RapGenius) Artist(id int) (result *Artist, err error) {
+	path := fmt.Sprintf("artists/%d", id)
+	response := &artistResponseRoot{}
+	err = h.execute(path, response)
+	if !checkErr(err) {
+		result = response.ArtistResponse.Artist
+	}
+	fmt.Print(response)
 	return
 }
 
