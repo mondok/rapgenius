@@ -19,7 +19,9 @@ func checkErr(e error) bool {
 
 type searchResponse struct {
 	Response struct {
-		SearchHits []*SearchHit `json:"hits"`
+		SearchHits []struct {
+			Item *SearchItem `json:"result"`
+		} `json:"hits"`
 	} `json:"response"`
 }
 
@@ -33,12 +35,6 @@ type songResponse struct {
 	Response struct {
 		Song *Song `json:"song"`
 	} `json:"response"`
-}
-
-// SearchHit is a single item in the
-// search results
-type SearchHit struct {
-	Item *SearchItem `json:"result"`
 }
 
 // SearchItem is a single search
@@ -235,12 +231,15 @@ func (h *RapGenius) Artist(id int) (result *Artist, err error) {
 }
 
 // Search searches RapGenius for the specified query
-func (h *RapGenius) Search(query string) (result []*SearchHit, err error) {
+func (h *RapGenius) Search(query string) (result []*SearchItem, err error) {
 	path := fmt.Sprintf("search?q=%s", query)
 	response := &searchResponse{}
 	err = h.execute(path, response)
 	if !checkErr(err) {
-		result = response.Response.SearchHits
+		result = make([]*SearchItem, len(response.Response.SearchHits))
+		for i, item := range response.Response.SearchHits {
+			result[i] = item.Item
+		}
 	}
 	return
 }

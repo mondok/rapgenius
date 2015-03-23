@@ -6,7 +6,7 @@
 ## Searching
     rapgenius := rapgenius.New()
     results, err := rapgenius.Search("notorious")
-    fmt.Printf("%s, %s", results[0].Item.Title, results[0].Item.Artist.Name)
+    fmt.Printf("%s, %s", results[0].Title, results[0].Artist.Name)
 
 ## Retrieving Artists
     rapgenius := rapgenius.New()
