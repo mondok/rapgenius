@@ -3,17 +3,17 @@
 ## Install
     go get github.com/mondok/rapgenius
 
-### Searching
+## Searching
     rapgenius := rapgenius.New()
     results, err := rapgenius.Search("notorious")
     fmt.Printf("%s, %s", results[0].Item.Title, results[0].Item.Artist.Name)
 
-### Retrieving Artists
+## Retrieving Artists
     rapgenius := rapgenius.New()
     artist, err := rapgenius.Artist(22)
     fmt.Printf("Artist is %s", artist.Name)
 
-### Retrieving Songs
+## Retrieving Songs
     rapgenius := rapgenius.New()
     song, err := rapgenius.Song(22)
-    fmt.Printf("Song is %s", song.Title)    
+    fmt.Printf("Song is %s", song.Title)
