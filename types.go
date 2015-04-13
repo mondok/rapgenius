@@ -2,24 +2,11 @@ package rapgenius
 
 import "net/http"
 
-type searchResponse struct {
-	Response struct {
-		SearchHits []struct {
-			Item *SearchItem `json:"result"`
-		} `json:"hits"`
-	} `json:"response"`
-}
-
-type artistResponse struct {
-	Response struct {
-		Artist *Artist `json:"artist"`
-	} `json:"response"`
-}
-
-type songResponse struct {
-	Response struct {
-		Song *Song `json:"song"`
-	} `json:"response"`
+// RapGenius is a new instance of RapGenius
+// HTTP client
+type RapGenius struct {
+	BaseURL string
+	Client  *http.Client
 }
 
 // SearchItem is a single search
@@ -158,9 +145,22 @@ type Song struct {
 	VerifiedAnnotationsBy []interface{} `json:"verified_annotations_by"`
 }
 
-// RapGenius is a new instance of RapGenius
-// HTTP client
-type RapGenius struct {
-	BaseURL string
-	Client  *http.Client
+type searchResponse struct {
+	Response struct {
+		SearchHits []struct {
+			Item *SearchItem `json:"result"`
+		} `json:"hits"`
+	} `json:"response"`
+}
+
+type artistResponse struct {
+	Response struct {
+		Artist *Artist `json:"artist"`
+	} `json:"response"`
+}
+
+type songResponse struct {
+	Response struct {
+		Song *Song `json:"song"`
+	} `json:"response"`
 }
